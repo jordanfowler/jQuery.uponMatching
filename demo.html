@@ -11,13 +11,21 @@
       $(function(){
         $('#demo-input').uponMatching({
           eventType: 'keyup',
-          matcher: /\@([^\s]+)/,
+          matcher: /\@([^\s]{0,})/,
+          // matcher: function(value) {
+          //   var listOfNames = ['Jordan', 'John', 'Jacob', 'Jingleheimer', 'Schmidt'];
+          // 
+          //   return listOfNames.indexOf(value) >= 0;
+          // },
+          // matcher: 'Jordan',
           delay: 100,
           onMatch: function(event, value) {
-            $('#demo-result').html('Match!: ' + value);
+            $(this).css('color', 'green');
+            // $('#demo-result').html('Match!: ' + value);
           },
           onMiss: function(event, value) {
-            $('#demo-result').html('No match, sorry :(');
+            $(this).css('color', 'red');
+            // $('#demo-result').html('No match, sorry :(');
           }
         })
       });
