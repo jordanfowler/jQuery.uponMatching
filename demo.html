@@ -21,11 +21,11 @@
           delay: 100,
           onMatch: function(event, value) {
             $(this).css('color', 'green');
-            // $('#demo-result').html('Match!: ' + value);
+            $('#demo-result').html('Match!: ' + value);
           },
           onMiss: function(event, value) {
             $(this).css('color', 'red');
-            // $('#demo-result').html('No match, sorry :(');
+            $('#demo-result').html('No match, sorry :(');
           }
         })
       });
