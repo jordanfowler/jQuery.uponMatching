@@ -12,8 +12,12 @@
         $('#demo-input').uponMatching({
           eventType: 'keyup',
           matcher: /\@([^\s]+)/,
-          handler: function(event, value) {
-            $('#demo-result').html('Successful match: ' + value);
+          delay: 500,
+          onMatch: function(event, value) {
+            $('#demo-result').html('Match!: ' + value);
+          },
+          onMiss: function(event, value) {
+            $('#demo-result').html('No match, sorry :(');
           }
         })
       });

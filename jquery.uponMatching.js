@@ -11,10 +11,12 @@
 (function($) {
   var methods = {
     init: function(options) {
-      if (!options['matcher'] || !options['handler']) {
-        $.error('jQuery.uponMatching requires options "matcher" and "handler" to be specified.');
+      if (!options['matcher'] || !options['onMatch']) {
+        $.error('jQuery.uponMatching requires options "matcher" and "onMatch" to be specified.');
       } else {
         var settings = {
+          onMatch: function(event, value) {},
+          onMiss: function(event, value) {},
           eventType: 'change',
           attr: 'val',
           delay: 50
@@ -35,7 +37,8 @@
     test: function(event) {
       var self = $(this),
           matcher = event.data.matcher,
-          handler = event.data.handler,
+          onMatch = event.data.onMatch,
+          onMiss  = event.data.onMiss,
           attr = event.data.attr,
           delay = event.data.delay;
 
@@ -52,8 +55,10 @@
 
       if (retVal) {
         setTimeout(function() {
-          handler.apply(self, [event, value]);
+          onMatch.apply(self, [event, value]);
         }, delay);
+      } else {
+        onMiss.apply(self, [event, value]);
       }
     },
 
